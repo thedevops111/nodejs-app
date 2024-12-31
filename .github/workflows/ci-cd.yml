@@ -22,6 +22,12 @@ jobs:
     - name: Checkout code  
       uses: actions/checkout@v3  
 
-    - name: Deploy to server  
-      run: scp app.js package.json user@server:/var/www/nodejs-app  
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+    - name: Deploy application
+      run: scp app.js package.json user@192.168.29.179:/var/www/nodejs-app
 
