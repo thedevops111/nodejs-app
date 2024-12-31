@@ -1,0 +1,33 @@
+name: CI/CD Pipeline  
+
+on:  
+  push:  
+    branches: [main]  
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+
+    steps:  
+    - name: Checkout code  
+      uses: actions/checkout@v3  
+
+    - name: Install dependencies  
+      run: npm install  
+
+    - name: Run tests  
+      run: npm test  
+
+    - name: Build application  
+      run: npm run build  
+      
+  deploy:  
+    runs-on: ubuntu-latest  
+
+    steps:  
+    - name: Checkout code  
+      uses: actions/checkout@v3  
+
+    - name: Deploy to server  
+      run: scp -r ./build user@server:/var/www/html  
+
