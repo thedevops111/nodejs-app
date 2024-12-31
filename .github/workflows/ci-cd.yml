@@ -29,5 +29,5 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Deploy application
-      run: scp app.js package.json user@192.168.29.179:/var/www/nodejs-app
+      run: echo "Hello, DevOps! 🚀 Your CI/CD pipeline is live!"
 
